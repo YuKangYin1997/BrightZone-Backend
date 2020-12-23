@@ -81,7 +81,12 @@ public class AccountController extends BaseController {
                                              @RequestParam("type") String requestType) {
         HashMap<String, Object> result = new HashMap<>();
 
-        Map<String, Object> map = accountService.createRequest(getUserId(), requestMessage, requestType);
+        Map<String, Object> map;
+        try {
+            map = accountService.createRequest(getUserId(), requestMessage, requestType);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("unauthorized");
+        }
         boolean success = (boolean) map.get("success");
         result.put("success", success);
         if (!success) {
@@ -125,13 +130,12 @@ public class AccountController extends BaseController {
     public ResponseEntity<Object> updateEmail(@RequestParam("email") String email) {
         HashMap<String, Object> result = new HashMap<>();
 
-        Map<String, Object> map = accountService.updateEmail(getUserId(), email);
-//        Map<String, Object> map = new HashMap<>();
-//        try {
-//            map = accountService.updateEmail(getUserId(), email);
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
-//        }
+        Map<String, Object> map;
+        try {
+            map = accountService.updateEmail(getUserId(), email);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        }
         boolean success = (boolean) map.get("success");
         result.put("success", success);
         if (!success) {
@@ -145,7 +149,12 @@ public class AccountController extends BaseController {
     public ResponseEntity<Object> updatePassword(@RequestParam("password") String password) {
         HashMap<String, Object> result = new HashMap<>();
 
-        Map<String, Object> map = accountService.updatePassword(getUserId(), password);
+        Map<String, Object> map;
+        try {
+            map = accountService.updatePassword(getUserId(), password);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("unauthorized");
+        }
         boolean success = (boolean) map.get("success");
         result.put("success", success);
         if (!success) {

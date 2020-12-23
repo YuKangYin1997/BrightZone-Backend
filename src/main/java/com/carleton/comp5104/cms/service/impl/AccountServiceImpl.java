@@ -51,7 +51,16 @@ public class AccountServiceImpl implements AccountService {
         if (registerWithEmail) {
             optionalPerson = personRepository.findByEmail(emailOrUserId);
         } else {
-            int personId = Integer.parseInt(emailOrUserId);
+//            int personId = Integer.parseInt(emailOrUserId);
+//            optionalPerson = personRepository.findById(personId);
+            int personId = -1;
+            try {
+                personId = Integer.parseInt(emailOrUserId);
+            } catch (NumberFormatException nfe) {
+                map.put("success", false);
+                map.put("errMsg", "UserId is not valid");
+                return map;
+            }
             optionalPerson = personRepository.findById(personId);
         }
 
@@ -114,7 +123,16 @@ public class AccountServiceImpl implements AccountService {
         if (loginWithEmail) {
             optionalAccount = accountRepository.findByEmail(emailOrUserId);
         } else {
-            int userId = Integer.parseInt(emailOrUserId);
+//            int userId = Integer.parseInt(emailOrUserId);
+//            optionalAccount = accountRepository.findById(userId);
+            int userId = -1;
+            try {
+                userId = Integer.parseInt(emailOrUserId);
+            } catch (NumberFormatException nfe) {
+                map.put("success", false);
+                map.put("errMsg", "UserId is invalid");
+                return map;
+            }
             optionalAccount = accountRepository.findById(userId);
         }
 
