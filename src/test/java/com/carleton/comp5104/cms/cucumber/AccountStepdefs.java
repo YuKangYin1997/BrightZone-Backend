@@ -15,6 +15,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
 
@@ -104,7 +106,8 @@ public class AccountStepdefs {
         if (session != null) {
             System.out.println(session.getAttribute("userId"));
         }
-        this.resultMap = accountController.logout(mockHttpServletRequest);
+        ResponseEntity<Object> logoutResult = accountController.logout(mockHttpServletRequest);
+        this.resultMap = (Map<String, Object>) logoutResult.getBody();
         System.out.println(this.resultMap);
     }
 

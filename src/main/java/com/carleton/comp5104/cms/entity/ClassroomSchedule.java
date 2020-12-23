@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ import java.sql.Time;
 @NoArgsConstructor
 public class ClassroomSchedule {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int scheduleId;
     private int roomId;
     private int professorId;
@@ -23,6 +24,8 @@ public class ClassroomSchedule {
     private int roomCapacity;
     @Enumerated(EnumType.STRING)
     private WeekDay weekday;
-    private Time startTime;
-    private Time endTime;
+    //    private Time startTime;
+//    private Time endTime;
+    private Timestamp startTime;
+    private Timestamp endTime;
 }

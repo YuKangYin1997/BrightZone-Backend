@@ -117,8 +117,10 @@ public class AdminClazzServiceImpl implements AdminClazzService {
         ArrayList<Classroom> allAvailableClassroom = new ArrayList<>();
         ArrayList<Integer> assignedClassroomId = new ArrayList<>();
         for (ClassroomSchedule classroomSchedule : allByWeekdayAndRoomCapacity) {
-            Time startTimeExisted = classroomSchedule.getStartTime();
-            Time endTimeExisted = classroomSchedule.getEndTime();
+            Time startTimeExisted = formatString2Time(classroomSchedule.getStartTime().toString());
+//            Time startTimeExisted = classroomSchedule.getStartTime();
+//            Time endTimeExisted = classroomSchedule.getEndTime();
+            Time endTimeExisted = formatString2Time(classroomSchedule.getEndTime().toString());
             if (formatString2Time(endTime).before(startTimeExisted) || formatString2Time(startTime).after(endTimeExisted)) {
                 ;
             } else {
@@ -186,8 +188,8 @@ public class AdminClazzServiceImpl implements AdminClazzService {
                     newClassroomSchedule.setClassId(classId);
                     newClassroomSchedule.setRoomCapacity(roomCapacityAsked);
                     newClassroomSchedule.setWeekday(weekDay);
-                    newClassroomSchedule.setStartTime(startTime);
-                    newClassroomSchedule.setEndTime(endTime);
+//                    newClassroomSchedule.setStartTime(startTime);
+//                    newClassroomSchedule.setEndTime(endTime);
                     classroomScheduleRepository.save(newClassroomSchedule);
                 }
                 status = 0;
@@ -231,8 +233,8 @@ public class AdminClazzServiceImpl implements AdminClazzService {
                             classroomSchedule.setRoomCapacity(roomCapacityAsked);
                         }
                         classroomSchedule.setWeekday(weekDay);
-                        classroomSchedule.setStartTime(startTime);
-                        classroomSchedule.setEndTime(endTime);
+//                        classroomSchedule.setStartTime(startTime);
+//                        classroomSchedule.setEndTime(endTime);
                         classroomScheduleRepository.save(classroomSchedule);
                     }
                 }
@@ -283,5 +285,6 @@ public class AdminClazzServiceImpl implements AdminClazzService {
         }
         return inputTimeFormatted;
     }
+
 
 }

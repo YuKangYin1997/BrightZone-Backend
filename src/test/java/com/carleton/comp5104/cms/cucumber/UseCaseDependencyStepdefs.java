@@ -16,7 +16,9 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockMultipartFile;
@@ -515,24 +517,26 @@ public class UseCaseDependencyStepdefs {
 //        clazzRepository.deleteById(C3);
 
         accountRepository.deleteById(S1);
-        Map<String, Object> logoutResultS1 = accountController.logout(requestS1);
-        Assert.assertTrue((Boolean) logoutResultS1.get("success"));
+//        Map<String, Object> logoutResultS1 = accountController.logout(requestS1);
+        ResponseEntity<Object> logoutResultS1 = accountController.logout(requestS1);
+//        Assert.assertTrue((Boolean) logoutResultS1.get("success"));
+        Assert.assertEquals(HttpStatus.OK, logoutResultS1.getStatusCode());  // assert logout success
 
         accountRepository.deleteById(S2);
-        Map<String, Object> logoutResultS2 = accountController.logout(requestS2);
-        Assert.assertTrue((Boolean) logoutResultS2.get("success"));
+        ResponseEntity<Object> logoutResultS2 = accountController.logout(requestS2);
+        Assert.assertEquals(HttpStatus.OK, logoutResultS2.getStatusCode());
 
         accountRepository.deleteById(S3);
-        Map<String, Object> logoutResultS3 = accountController.logout(requestS3);
-        Assert.assertTrue((Boolean) logoutResultS3.get("success"));
+        ResponseEntity<Object> logoutResultS3 = accountController.logout(requestS3);
+        Assert.assertEquals(HttpStatus.OK, logoutResultS3.getStatusCode());
 
         accountRepository.deleteById(P1);
-        Map<String, Object> logoutResultP1 = accountController.logout(requestP1);
-        Assert.assertTrue((Boolean) logoutResultP1.get("success"));
+        ResponseEntity<Object> logoutResultP1 = accountController.logout(requestP1);
+        Assert.assertEquals(HttpStatus.OK, logoutResultP1.getStatusCode());
 
         accountRepository.deleteById(P2);
-        Map<String, Object> logoutResultP2 = accountController.logout(requestP2);
-        Assert.assertTrue((Boolean) logoutResultP2.get("success"));
+        ResponseEntity<Object> logoutResultP2 = accountController.logout(requestP2);
+        Assert.assertEquals(HttpStatus.OK, logoutResultP2.getStatusCode());
     }
 
     public Course createTestCourse() {
