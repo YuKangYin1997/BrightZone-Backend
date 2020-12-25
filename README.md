@@ -20,3 +20,10 @@ Usage:
 - Run CmsApplication
 - Open localhost:8080/populate
 - Wait until `DB populated successfully` is shown
+
+## 3. Executing EvoMaster
+- Right click `EMDrive.java` located at `src/test/java/com/carleton/comp5104/cms/driver/EMDriver.java` and say `Run 'EMDriver.main()'`
+- Type command `java -jar evomaster.jar --maxTime 20s --outputFolder src/test/java` in terminal to execute `evomaster`
+- Once you have already down so, you will see a `EvoMasterTest.java` file generated under `src/test/java/` folder
+- Then simply right click `EvoMasterTest.java` and say `Run 'EvoMasterTest'` or `Run 'EvoMaster' with Coverage`
+- After that, you'll see several test cases pass at the bottom window and code coverage at the right sidebar
